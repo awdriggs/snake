@@ -156,6 +156,7 @@ function render() {
     }
   } else { //snake is out of bounds, lets reset
     console.log('reset');
+      score = 0;
       document.getElementById('count').innerHTML = 0 
     snake = setup(size);
   }
@@ -207,7 +208,28 @@ var score = 0; //used to display score and set the speed
 //how to make it speed up?
 //set interval here instead?
 //as a closure?
-setInterval(render, 50 );
+//setInterval(render, 50 );
+function draw(speedFactor, cb){
+  var speed = setSpeed(speedFactor) 
+  console.log(speed);
+  cb(function(){
+    render();
+    draw(score, setTimeout)
+  }, speed);
+}
+
+function setSpeed(sFactor){
+  var speed = 130 - (sFactor * 10)
+
+  if(speed <= 0){
+    speed = 10;
+  }
+
+  return speed;
+}
+
+//get started
+draw(score, setTimeout);
 
 
 //move this to a document ready
